@@ -33,3 +33,10 @@ exports.deleteReview = (reviewId, callback) => {
     const query = `DELETE FROM review WHERE reviewId = ?`;
     connection.query(query, [reviewId], callback);
 };
+module.exports = {
+    createCategory,
+    getAllCategories,
+    getCategoryById,
+    updateCategory,
+    deleteCategory
+};

@@ -46,3 +46,10 @@ exports.deleteDeposit = (req, res) => {
         res.status(200).json({ message: 'Deposit deleted successfully' });
     });
 };
+module.exports = {
+    createCategory,
+    getAllCategories,
+    getCategoryById,
+    updateCategory,
+    deleteCategory
+};
