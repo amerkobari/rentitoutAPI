@@ -1,42 +1,45 @@
-const express = require('express');
+// userModel.js
+const connection = require('../Config/db'); // Import the database connection
 
-const router = express.Router();
-
-
-
-// User registration endpoint
-router.post('/', (req, res) => {
-    const userId = req.body.userId;
-    const name = req.body.name;
-    const email = req.body.email;
-    const password = req.body.password;
-    const phone = req.body.phone;
-    const verified = req.body.verified;
-
+// Create a new user
+const createUser = (userData, callback) => {
+    const { userId, name, email, password, phone, verified } = userData;
     connection.query(
         'INSERT INTO user (userid, name, email, password, phone, verified) VALUES (?, ?, ?, ?, ?, ?)',
         [userId, name, email, password, phone, verified],
-        (err, result) => {
-            if (err) {
-                console.error('Error registering user:', err.message);
-                res.status(500).json({ message: 'An error occurred' });
-                return;
-            }
-            res.status(201).json({ message: 'User registered successfully' });
-        }
+        callback
     );
-});
+};
 
-// Get all users endpoint
-router.get('/', (req, res) => {
-    const query = 'SELECT * FROM user'; // Adjust the query to match your table structure
-    connection.query(query, (err, results) => {
-        if (err) {
-            console.error('Error fetching users:', err);
-            return res.status(500).send(err);
-        }
-        res.status(200).json(results); // Send the results as JSON
-    });
-});
+// Get all users
+const getAllUsers = (callback) => {
+    connection.query('SELECT * FROM user', callback);
+};
 
-module.exports = router; // Export the router
+// Get user by ID
+const getUserById = (userId, callback) => {
+    connection.query('SELECT * FROM user WHERE userid = ?', [userId], callback);
+};
+
+// Update user
+const updateUser = (userId, userData, callback) => {
+    const { name, email, password, phone, verified } = userData;
+    connection.query(
+        'UPDATE user SET name = ?, email = ?, password = ?, phone = ?, verified = ? WHERE userid = ?',
+        [name, email, password, phone, verified, userId],
+        callback
+    );
+};
+
+// Delete user
+const deleteUser = (userId, callback) => {
+    connection.query('DELETE FROM user WHERE userid = ?', [userId], callback);
+};
+
+module.exports = {
+    createUser,
+    getAllUsers,
+    getUserById,
+    updateUser,
+    deleteUser
+};

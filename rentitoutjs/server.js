@@ -1,34 +1,32 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const userRoutes = require('../rentitoutjs/RentItOut/Models/user'); // Import user routes
-const app = express();
+const userRoutes = require('./RentItOut/Routes/userRoutes');
+const itemRoutes = require('./RentItOut/Routes/itemRoutes');
+// const categoryRoutes = require('./RentItOut/Routes/categoryRoutes');
+// const logisticsRoutes = require('./RentItOut/Routes/logisticsRoutes');
+// const paymentRoutes = require('./RentItOut/Routes/paymentRoutes');
+// const rentalRoutes = require('./RentItOut/Routes/rentalRoutes');
+// const reviewRoutes = require('./RentItOut/Routes/reviewRoutes');
+// const securityRoutes = require('./RentItOut/Routes/securityRoutes');
+// Use a relative path
 const mysql = require('mysql2');
 
-
-// Create a connection to the database
-const connection = mysql.createConnection({
-    host: 'localhost',        // Your database host
-    user: 'root',     // Your database username
-    password: 'Aaa98981119@', // Your database password
-    database: 'mydb'  // Your database name
-});
-
-// Connect to the database
-connection.connect((err) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-    }
-    console.log('Connected to the database!');
-});
-
-
+const app = express();
 
 // Middleware to parse JSON
 app.use(bodyParser.json());
 
 // Use the user routes
 app.use('/user', userRoutes); // Prefix user routes with /user
+app.use('/item', itemRoutes);
+// app.use('/category', categoryRoutes);
+// app.use('/logistics', logisticsRoutes);
+// app.use('/payment', paymentRoutes);
+// app.use('/rental', rentalRoutes);
+// app.use('/review', reviewRoutes);
+// app.use('/security', securityRoutes);
+
+
 
 // Start the server
 const PORT = 3000; // You can change this if necessary
