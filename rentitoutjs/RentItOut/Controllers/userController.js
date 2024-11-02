@@ -1,9 +1,11 @@
 const userModel = require('../Models/user');
 const nodemailer = require('nodemailer');
+const crypto = require("crypto");
 
 // Register a new user and send verification email
 const registerUser = (req, res) => {
     const userData = req.body;
+    userData.verificationToken = crypto.randomBytes(32).toString('hex');
     userModel.createUser(userData, (err, result) => {
         if (err) {
             console.error('Error registering user:', err.message);
@@ -27,7 +29,7 @@ const registerUser = (req, res) => {
             from: 'rentitoutco@gmail.com',
             to: userData.email,
             subject: 'Email Verification',
-            text: 'Please verify your email by clicking the following link: ${verificationLink}'
+            text: `Please verify your email by clicking the following link: ${verificationLink}`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
