@@ -3,9 +3,9 @@ const connection = require('../Config/db'); // Import the database connection
 
 // Create a new item
 const createItem = (itemData, callback) => {
-    const { userId, title, description, category, price, available } = itemData;
-    const query = 'INSERT INTO item (userId, title, description, category, price, available) VALUES (?, ?, ?, ?, ?, ?)';
-    connection.query(query, [userId, title, description, category, price, available], callback);
+    const { itemId,userId, title, description, category, price, available } = itemData;
+    const query = 'INSERT INTO item (itemId,userId, title, description, category, price, available) VALUES (?,?, ?, ?, ?, ?, ?)';
+    connection.query(query, [itemId,userId, title, description, category, price, available], callback);
 };
 
 // Fetch all items

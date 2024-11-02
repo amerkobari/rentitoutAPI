@@ -59,6 +59,8 @@ const deleteLogistics = (req, res) => {
     });
 };
 
+
+
 module.exports = {
     createLogistics,
     fetchAllLogistics,
