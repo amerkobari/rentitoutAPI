@@ -8,6 +8,10 @@ const paymentRoutes = require('./RentItOut/Routes/paymentRoutes');
 const rentalRoutes = require('./RentItOut/Routes/rentalRoutes');
 const reviewRoutes = require('./RentItOut/Routes/reviewRoutes');
 const securityRoutes = require('./RentItOut/Routes/securityRoutes');
+const distanceRoutes = require('./RentItOut/Routes/distanceRoutes');
+
+
+
 // Use a relative path
 const mysql = require('mysql2');
 
@@ -25,7 +29,7 @@ app.use('/payment', paymentRoutes);
 app.use('/rental', rentalRoutes);
 app.use('/review', reviewRoutes);
 app.use('/security', securityRoutes);
-
+app.use('/distance', distanceRoutes); // Use the distance routes under /api
 
 
 // Start the server
@@ -33,3 +37,8 @@ const PORT = 3000; // You can change this if necessary
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+// app.use((err, req, res, next) => {
+//     console.error(err.stack);
+//     res.status(500).send('Something went wrong!');
+// });

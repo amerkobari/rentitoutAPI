@@ -18,4 +18,6 @@ router.put('/:id', logisticsController.updateLogistics);
 // Delete logistics record
 router.delete('/:id', logisticsController.deleteLogistics);
 
+
+
 module.exports = router; // Export the router
