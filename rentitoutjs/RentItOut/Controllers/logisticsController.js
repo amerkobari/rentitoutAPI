@@ -1,6 +1,6 @@
 
 // logisticsController.js
-const logisticsModel = require('../Models/logisticsModel'); // Import the logistics model
+const logisticsModel = require('../Models/logistics'); // Import the logistics model
 
 // Create a new logistics record
 const createLogistics = (req, res) => {

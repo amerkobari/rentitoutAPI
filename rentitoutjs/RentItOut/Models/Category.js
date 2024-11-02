@@ -3,10 +3,10 @@ const connection = require('../Config/db'); // Import the database connection
 
 // Create a new category
 const createCategory = (categoryData, callback) => {
-    const { name, description } = categoryData;
+    const {catId ,name, description } = categoryData;
     connection.query(
-        'INSERT INTO category (name, description) VALUES (?, ?)',
-        [name, description],
+        'INSERT INTO category (catId,name, description) VALUES (?,?, ?)',
+        [catId,name, description],
         callback
     );
 };
