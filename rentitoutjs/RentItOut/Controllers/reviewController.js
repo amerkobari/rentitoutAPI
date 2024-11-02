@@ -1,8 +1,8 @@
 // reviewController.js
-const reviewModel = require('../Models/reviewModel'); // Adjust the path if necessary
+const reviewModel = require('../Models/review'); // Adjust the path if necessary
 
 // Create a new review
-exports.createReview = (req, res) => {
+const createReview = (req, res) => {
     const reviewData = req.body;
     reviewModel.createReview(reviewData, (err, result) => {
         if (err) return res.status(500).json({ message: err.message });
@@ -11,7 +11,7 @@ exports.createReview = (req, res) => {
 };
 
 // Get all reviews
-exports.getAllReviews = (req, res) => {
+const getAllReviews = (req, res) => {
     reviewModel.getAllReviews((err, results) => {
         if (err) return res.status(500).json({ message: err.message });
         res.status(200).json(results);
@@ -19,7 +19,7 @@ exports.getAllReviews = (req, res) => {
 };
 
 // Get review by ID
-exports.getReviewById = (req, res) => {
+const getReviewById = (req, res) => {
     const reviewId = req.params.id;
     reviewModel.getReviewById(reviewId, (err, result) => {
         if (err) return res.status(500).json({ message: err.message });
@@ -29,7 +29,7 @@ exports.getReviewById = (req, res) => {
 };
 
 // Update review by ID
-exports.updateReview = (req, res) => {
+const updateReview = (req, res) => {
     const reviewId = req.params.id;
     const reviewData = req.body;
     reviewModel.updateReview(reviewId, reviewData, (err) => {
@@ -39,10 +39,18 @@ exports.updateReview = (req, res) => {
 };
 
 // Delete review by ID
-exports.deleteReview = (req, res) => {
+const deleteReview = (req, res) => {
     const reviewId = req.params.id;
     reviewModel.deleteReview(reviewId, (err) => {
         if (err) return res.status(500).json({ message: err.message });
         res.status(200).json({ message: 'Review deleted successfully' });
     });
+};
+
+module.exports = {
+    createReview,
+    getAllReviews,
+    getReviewById,
+    updateReview,
+    deleteReview
 };

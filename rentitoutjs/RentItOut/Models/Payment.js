@@ -3,10 +3,10 @@ const connection = require('../Config/db'); // Import the database connection
 
 // Create a new payment record
 const createPayment = (paymentData, callback) => {
-    const { rentalId, userId, totalAmount, insuranceFee, status, creationTime } = paymentData;
+    const { paymentId,rentalId, userId, totalAmount, insuranceFee, status, creationTime } = paymentData;
     connection.query(
-        'INSERT INTO payment (rentalId, userId, totalAmount, insuranceFee, status, creationTime) VALUES (?, ?, ?, ?, ?, ?)',
-        [rentalId, userId, totalAmount, insuranceFee, status, creationTime],
+        'INSERT INTO payment (paymentId,rentalId, userId, totalAmount, insuranceFee, status, creationTime) VALUES (?,?, ?, ?, ?, ?, ?)',
+        [paymentId,rentalId, userId, totalAmount, insuranceFee, status, creationTime],
         callback
     );
 };

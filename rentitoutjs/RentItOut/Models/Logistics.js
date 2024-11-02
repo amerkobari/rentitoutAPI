@@ -3,10 +3,10 @@ const connection = require('../Config/db'); // Import the database connection
 
 // Create a new logistics record
 const createLogistics = (logisticsData, callback) => {
-    const { rentalId, pickupType, pickupLocation, fees, pickupDate, returnDate } = logisticsData;
+    const {logisticsId, rentalId, pickupType, pickupLocation, fees, pickupDate, returnDate } = logisticsData;
     connection.query(
-        'INSERT INTO logistics (rentalId, pickupType, pickupLocation, fees, pickupDate, returnDate) VALUES (?, ?, ?, ?, ?, ?)',
-        [rentalId, pickupType, pickupLocation, fees, pickupDate, returnDate],
+        'INSERT INTO logistics (logisticsId,rentalId, pickupType, pickupLocation, fees, pickupDate, returnDate) VALUES (?,?, ?, ?, ?, ?, ?)',
+        [logisticsId,rentalId, pickupType, pickupLocation, fees, pickupDate, returnDate],
         callback
     );
 };

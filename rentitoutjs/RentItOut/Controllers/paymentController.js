@@ -1,5 +1,5 @@
 // paymentController.js
-const paymentModel = require('../Models/paymentModel'); // Import the payment model
+const paymentModel = require('../Models/payment'); // Import the payment model
 
 // Create a new payment record
 const createPayment = (req, res) => {

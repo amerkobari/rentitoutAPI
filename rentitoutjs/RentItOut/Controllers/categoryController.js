@@ -1,5 +1,5 @@
 // categoryController.js
-const categoryModel = require('../Models/categoryModel'); // Import the category model
+const categoryModel = require('../Models/category'); // Import the category model
 
 // Create a new category
 const createCategory = (req, res) => {

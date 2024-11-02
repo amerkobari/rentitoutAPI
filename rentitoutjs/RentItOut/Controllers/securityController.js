@@ -1,5 +1,5 @@
 // securityController.js
-const securityModel = require('../Models/securityModel'); // Adjust the path if necessary
+const securityModel = require('../Models/security'); // Adjust the path if necessary
 
 // Create a new deposit
 exports.createDeposit = (req, res) => {

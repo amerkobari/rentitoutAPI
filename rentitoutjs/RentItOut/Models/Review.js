@@ -2,19 +2,19 @@
 const connection = require('../Config/db'); // Your database connection file
 
 // Create a new review
-exports.createReview = (reviewData, callback) => {
+const createReview = (reviewData, callback) => {
     const query = `INSERT INTO review (rentalId, reviewerId, rating, comment) VALUES (?, ?, ?, ?)`;
     connection.query(query, [reviewData.rentalId, reviewData.reviewerId, reviewData.rating, reviewData.comment], callback);
 };
 
 // Get all reviews
-exports.getAllReviews = (callback) => {
+const getAllReviews = (callback) => {
     const query = `SELECT * FROM review`;
     connection.query(query, callback);
 };
 
 // Get review by ID
-exports.getReviewById = (reviewId, callback) => {
+const getReviewById = (reviewId, callback) => {
     const query = `SELECT * FROM review WHERE reviewId = ?`;
     connection.query(query, [reviewId], (err, results) => {
         if (err) return callback(err);
@@ -23,13 +23,21 @@ exports.getReviewById = (reviewId, callback) => {
 };
 
 // Update review by ID
-exports.updateReview = (reviewId, reviewData, callback) => {
+const updateReview = (reviewId, reviewData, callback) => {
     const query = `UPDATE review SET rentalId = ?, reviewerId = ?, rating = ?, comment = ? WHERE reviewId = ?`;
     connection.query(query, [reviewData.rentalId, reviewData.reviewerId, reviewData.rating, reviewData.comment, reviewId], callback);
 };
 
 // Delete review by ID
-exports.deleteReview = (reviewId, callback) => {
+const deleteReview = (reviewId, callback) => {
     const query = `DELETE FROM review WHERE reviewId = ?`;
     connection.query(query, [reviewId], callback);
+};
+
+module.exports = {
+    createReview,
+    getAllReviews,
+    getReviewById,
+    updateReview,
+    deleteReview
 };
