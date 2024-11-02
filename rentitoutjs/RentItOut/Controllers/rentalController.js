@@ -47,9 +47,9 @@ exports.deleteRental = (req, res) => {
     });
 };
 module.exports = {
-    createCategory,
-    getAllCategories,
-    getCategoryById,
-    updateCategory,
-    deleteCategory
+    createRental,
+    getAllRentals,
+    getRentalById,
+    updateRental,
+    deleteRental
 };

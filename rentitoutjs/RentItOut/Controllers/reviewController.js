@@ -46,10 +46,12 @@ exports.deleteReview = (req, res) => {
         res.status(200).json({ message: 'Review deleted successfully' });
     });
 };
+
+// Export review functions
 module.exports = {
-    createCategory,
-    getAllCategories,
-    getCategoryById,
-    updateCategory,
-    deleteCategory
+    createReview,
+    getAllReviews,
+    getReviewById,
+    updateReview,
+    deleteReview
 };

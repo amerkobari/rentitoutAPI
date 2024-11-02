@@ -34,9 +34,9 @@ exports.deleteReview = (reviewId, callback) => {
     connection.query(query, [reviewId], callback);
 };
 module.exports = {
-    createCategory,
-    getAllCategories,
-    getCategoryById,
-    updateCategory,
-    deleteCategory
+    createReview,
+    getAllReviews,
+    getReviewById,
+    updateReview,
+    deleteReview
 };

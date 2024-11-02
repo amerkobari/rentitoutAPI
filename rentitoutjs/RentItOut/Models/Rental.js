@@ -33,10 +33,12 @@ exports.deleteRental = (rentalId, callback) => {
     const query = `DELETE FROM rental WHERE rentalId = ?`;
     connection.query(query, [rentalId], callback);
 };
+
+// Export rental functions
 module.exports = {
-    createCategory,
-    getAllCategories,
-    getCategoryById,
-    updateCategory,
-    deleteCategory
+    createRental,
+    getAllRentals,
+    getRentalById,
+    updateRental,
+    deleteRental
 };
