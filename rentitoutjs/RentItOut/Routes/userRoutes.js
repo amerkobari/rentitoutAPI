@@ -1,10 +1,12 @@
-// userRoutes.js
 const express = require('express');
 const router = express.Router();
 const userController = require('../Controllers/userController'); // Use a relative path
 
 // User registration endpoint
 router.post('/', userController.registerUser);
+
+// Email verification endpoint
+router.get('/verify/:token', userController.verifyUserEmail);
 
 // Get all users endpoint
 router.get('/', userController.fetchAllUsers);
