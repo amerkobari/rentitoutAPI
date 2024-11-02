@@ -19,7 +19,7 @@ const registerUser = (req, res) => {
             service: 'Gmail',
             auth: {
                 user: 'rentitoutco@gmail.com',
-                pass: 'nswk ynxp vzhk rtvb'
+                pass: 'yooghhahjavtasqr'
             }
         });
 
