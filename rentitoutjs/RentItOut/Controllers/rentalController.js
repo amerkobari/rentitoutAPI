@@ -55,3 +55,10 @@ module.exports = {
     updateRental,
     deleteRental
 };
+module.exports = {
+    createRental,
+    getAllRentals,
+    getRentalById,
+    updateRental,
+    deleteRental
+};

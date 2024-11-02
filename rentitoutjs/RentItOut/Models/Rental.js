@@ -34,6 +34,10 @@ const deleteRental = (rentalId, callback) => {
     connection.query(query, [rentalId], callback);
 };
 
+<<<<<<< HEAD
+=======
+// Export rental functions
+>>>>>>> origin/sulaiman
 module.exports = {
     createRental,
     getAllRentals,
