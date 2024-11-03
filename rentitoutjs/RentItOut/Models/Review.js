@@ -33,10 +33,7 @@ const deleteReview = (reviewId, callback) => {
     const query = `DELETE FROM review WHERE reviewId = ?`;
     connection.query(query, [reviewId], callback);
 };
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/sulaiman
 module.exports = {
     createReview,
     getAllReviews,

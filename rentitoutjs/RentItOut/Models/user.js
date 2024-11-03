@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const createUser = (userData, callback) => {
    // const verificationToken = crypto.randomBytes(32).toString('hex'); // Generate a token
 
-    const { userId, name, email, password, phone, verified ,verificationToken} = userData;
+    const { userId, name, email, password, phone, verified ,verificationToken = crypto.randomBytes(32).toString('hex')} = userData;
 
     connection.query(
         'INSERT INTO user (userid, name, email, password, phone, verified, verificationToken) VALUES (?, ?, ?, ?, ?, ?, ?)',

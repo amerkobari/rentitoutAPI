@@ -3,17 +3,8 @@ const connection = require('../Config/db'); // Your database connection file
 
 // Create a new rental record
 const createRental = (rentalData, callback) => {
-    const rentalToken = crypto.randomBytes(32).toString('hex'); // Generate a unique token for the rental
-    const { itemId, renterId, rentStart, rentEnd, totalPrice } = rentalData;
-
-    const query = `
-        INSERT INTO rental (itemId, renterId, rentStart, rentEnd, totalPrice, status, rentalToken) 
-        VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    connection.query(
-        query,
-        [itemId, renterId, rentStart, rentEnd, totalPrice, 'pending', rentalToken], // Set initial status as "pending"
-        callback
-    );
+    const query = `INSERT INTO rental (itemId, renterId, rentStart, rentEnd, totalPrice) VALUES (?, ?, ?, ?, ?)`;
+    connection.query(query, [rentalData.itemId, rentalData.renterId, rentalData.rentStart, rentalData.rentEnd, rentalData.totalPrice], callback);
 };
 
 // Get all rental records
@@ -43,7 +34,6 @@ const deleteRental = (rentalId, callback) => {
     connection.query(query, [rentalId], callback);
 };
 
-// Export rental functions
 module.exports = {
     createRental,
     getAllRentals,

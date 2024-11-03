@@ -47,18 +47,10 @@ const deleteReview = (req, res) => {
     });
 };
 
-<<<<<<< HEAD
-=======
-// Export review functions
->>>>>>> origin/sulaiman
 module.exports = {
     createReview,
     getAllReviews,
     getReviewById,
     updateReview,
     deleteReview
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> origin/sulaiman

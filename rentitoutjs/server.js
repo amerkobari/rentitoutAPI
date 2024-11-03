@@ -38,10 +38,6 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-const notificationRoutes = require('./Routes/notificationRoutes');
-app.use('/api/notifications', notificationRoutes);
-
-
 // app.use((err, req, res, next) => {
 //     console.error(err.stack);
 //     res.status(500).send('Something went wrong!');

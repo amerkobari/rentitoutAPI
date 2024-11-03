@@ -18,13 +18,14 @@ const registerUser = (req, res) => {
 
         // Configure the mail transport
         const transporter = nodemailer.createTransport({
-            service: 'Gmail',
+            host: 'smtp.gmail.com',
             auth: {
                 user: 'rentitoutco@gmail.com',
                 pass: 'yooghhahjavtasqr'
-            }
-        });
-
+            },
+            port: 587, // or 587
+            secure: false,        });
+        console.log("mailer", transporter);
         const mailOptions = {
             from: 'rentitoutco@gmail.com',
             to: userData.email,
