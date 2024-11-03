@@ -33,11 +33,3 @@ exports.deleteDeposit = (depositId, callback) => {
     const query = `DELETE FROM security WHERE depositId = ?`;
     connection.query(query, [depositId], callback);
 };
-
-module.exports = {
-    createCategory,
-    getAllCategories,
-    getCategoryById,
-    updateCategory,
-    deleteCategory
-};

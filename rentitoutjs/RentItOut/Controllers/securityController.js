@@ -1,6 +1,5 @@
 // securityController.js
-const securityModel = require('../Models/security');
-const {createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory} = require("../Models/Security"); // Adjust the path if necessary
+const securityModel = require('../Models/security'); // Adjust the path if necessary
 
 // Create a new deposit
 exports.createDeposit = (req, res) => {
@@ -46,11 +45,4 @@ exports.deleteDeposit = (req, res) => {
         if (err) return res.status(500).json({ message: err.message });
         res.status(200).json({ message: 'Deposit deleted successfully' });
     });
-};
-module.exports = {
-    createCategory,
-    getAllCategories,
-    getCategoryById,
-    updateCategory,
-    deleteCategory
 };

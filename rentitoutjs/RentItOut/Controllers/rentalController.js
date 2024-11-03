@@ -1,31 +1,12 @@
-const rentalModel = require('../Models/Rental');
-const notificationModel = require('../Models/notificationModel');
-const { getAllRentals, getRentalById, deleteRental } = require("../Models/Rental");
+// rentalController.js
+const rentalModel = require('../Models/rental'); // Adjust the path if needed
 
-// Create a new rental record and notify user
+// Create a new rental record
 const createRental = (req, res) => {
     const rentalData = req.body;
-
     rentalModel.createRental(rentalData, (err, result) => {
         if (err) return res.status(500).json({ message: err.message });
-
-        // Notify user about booking confirmation
-        const notificationData = {
-            userId: rentalData.rentalId,
-            message: `Booking confirmed for item ${rentalData.itemId} with rental token ${result.insertId}`,
-            type: 'booking_confirmation',
-            status: 'unread',
-            createdAt: new Date()
-        };
-        notificationModel.createNotification(notificationData, (notifErr) => {
-            if (notifErr) console.error('Error creating notification:', notifErr);
-        });
-
-        res.status(201).json({
-            message: 'Rental record created successfully',
-            rentalId: result.insertId,
-            rentalToken: rentalData.rentalToken // Return rental token if needed
-        });
+        res.status(201).json({ message: 'Rental record created successfully', rentalId: result.insertId });
     });
 };
 
