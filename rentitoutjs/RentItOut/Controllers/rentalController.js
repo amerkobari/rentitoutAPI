@@ -26,35 +26,27 @@ const createRental = (req, res) => {
 };
 
 // Update rental by ID and notify user of any changes
-const updateRental = (req, res) => {
-    const rentalId = req.params.id;
+const notificationController = require('../Controllers/notificationController');
+
+// Create a new rental record
+const createRental = (req, res) => {
     const rentalData = req.body;
-    rentalModel.updateRental(rentalId, rentalData, (err) => {
+    rentalModel.createRental(rentalData, (err, result) => {
         if (err) return res.status(500).json({ message: err.message });
 
-        // Notify user about rental update
-        const notificationData = {
-            userId: rentalData.renterId,
-            message: `Your rental for item ${rentalData.itemId} has been updated.`,
-            type: 'rental_update',
-            status: 'unread',
-            createdAt: new Date()
-        };
-        notificationModel.createNotification(notificationData, (notifErr) => {
-            if (notifErr) console.error('Error creating notification:', notifErr);
-        });
+        // Send booking confirmation email
+        notificationController.sendBookingConfirmation(rentalData.userEmail, rentalData);
 
-        res.status(200).json({ message: 'Rental record updated successfully' });
+        res.status(201).json({ message: 'Rental record created successfully', rentalId: result.insertId });
     });
 };
 
-module.exports = {
-    createRental,
-    getAllRentals,
-    getRentalById,
-    updateRental,
-    deleteRental
+// Example of sending an expiry reminder email (could be triggered by a scheduler)
+const sendExpiryReminder = (rentalData) => {
+    notificationController.sendExpiryReminder(rentalData.userEmail, rentalData);
 };
+
+
 module.exports = {
     createRental,
     getAllRentals,

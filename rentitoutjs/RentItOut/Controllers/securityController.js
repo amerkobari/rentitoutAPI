@@ -1,5 +1,6 @@
 // securityController.js
-const securityModel = require('../Models/security'); // Adjust the path if necessary
+const securityModel = require('../Models/security');
+const {createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory} = require("../Models/Security"); // Adjust the path if necessary
 
 // Create a new deposit
 exports.createDeposit = (req, res) => {

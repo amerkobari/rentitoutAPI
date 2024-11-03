@@ -1,25 +1,51 @@
-// notificationController.js
-const notificationModel = require('../Models/notification'); // Import the notification model
+const nodemailer = require('nodemailer');
 
-// Create a new notification
-const createNotification = (req, res) => {
-    const notificationData = req.body;
-    notificationModel.createNotification(notificationData, (err, result) => {
-        if (err) return res.status(500).json({ message: 'Error creating notification' });
-        res.status(201).json({ message: 'Notification created successfully' });
+// Configure the email transporter
+const transporter = nodemailer.createTransport({
+    service: 'Gmail', // You can use other services like Outlook, Yahoo, or configure SMTP
+    auth: {
+        user: process.env.EMAIL_USER, // Set these in your environment variables
+        pass: process.env.EMAIL_PASS
+    }
+});
+
+// Function to send a booking confirmation email
+const sendBookingConfirmation = (userEmail, rentalDetails) => {
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: userEmail,
+        subject: 'Booking Confirmation',
+        text: `Your booking for ${rentalDetails.itemName} has been confirmed. Rental starts on ${rentalDetails.rentStart} and ends on ${rentalDetails.rentEnd}.`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        } else {
+            console.log('Booking confirmation email sent:', info.response);
+        }
     });
 };
 
-// Get notifications for a user
-const getNotificationsByUserId = (req, res) => {
-    const userId = req.params.userId;
-    notificationModel.getNotificationsByUserId(userId, (err, results) => {
-        if (err) return res.status(500).json({ message: 'Error fetching notifications' });
-        res.status(200).json(results);
+// Function to send a rental expiry reminder email
+const sendExpiryReminder = (userEmail, rentalDetails) => {
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: userEmail,
+        subject: 'Rental Expiry Reminder',
+        text: `Your rental for ${rentalDetails.itemName} is ending on ${rentalDetails.rentEnd}. Please return it on time to avoid additional charges.`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        } else {
+            console.log('Expiry reminder email sent:', info.response);
+        }
     });
 };
 
 module.exports = {
-    createNotification,
-    getNotificationsByUserId,
+    sendBookingConfirmation,
+    sendExpiryReminder
 };
